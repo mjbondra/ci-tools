@@ -4,7 +4,7 @@
 : "${CI_COMMIT_REF_NAME:?ci commit ref name is not set}"
 : "${SSH_PRIVATE_KEY:?ssh private key not set}"
 
-CI_REPOSITORY_URL=git@gitlab.com:$CI_PROJECT_PATH.git
+CI_REPOSITORY_URL="git@gitlab.com:$CI_PROJECT_PATH.git"
 
 eval "$(ssh-agent -s)"
 ssh-add <(echo "$SSH_PRIVATE_KEY")
