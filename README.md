@@ -13,32 +13,39 @@ Use it in a GitLab CI/CD Pipeline.
 ```yaml
 image: wondermonger/ci-tools:latest
 
-cache:
-  paths:
-    - node_modules/
-
 stages:
   - build
   - test
   - deploy
 
 install:
+  artifacts:
+    paths:
+      - node_modules/
   script: ci-node-install
   stage: build
 
 lint:
+  dependencies:
+    - install
   script: ci-node-lint
   stage: test
 
 unit:
+  dependencies:
+    - install
   script: ci-node-unit-tests
   stage: test
 
 integration:
+  dependencies:
+    - install
   script: ci-node-integration-tests
   stage: test
 
 release:
+  dependencies:
+    - install
   only:
     - master
   script:
@@ -47,11 +54,13 @@ release:
   stage: deploy
 
 publish:
+  dependencies:
+    - install
   only:
     - tags
   script: ci-node-publish
   stage: deploy
-  
+
 ```
 
 **Example `docker run`**
@@ -68,7 +77,7 @@ docker run \
   -w "/usr/local/my-project" \
   wondermonger/ci-tools:latest \
   /bin/bash -c "ci-git-config && ci-git-shell-release"
-  
+
 ```
 
 ## CI/CD Scripts
