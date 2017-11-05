@@ -56,7 +56,7 @@ publish:
 
 **Example `docker run`**
 
-```bash
+```shell
 docker run \
   -e ACCESS_EMAIL \
   -e ACCESS_NAME \
