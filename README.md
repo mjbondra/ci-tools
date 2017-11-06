@@ -107,6 +107,22 @@ ci-shell-lint
 
 ```
 
+## Environment Variables
+
+| Variable              | Description                              | Required By                              |
+| --------------------- | ---------------------------------------- | ---------------------------------------- |
+| `CI_COMMIT_TAG`       | Version Tag                              | `ci-docker-build`                        |
+| `CI_COMMIT_REF_NAME`  | Branch or Tag Name                       | `ci-git-node-release` `ci-git-shell-release` |
+| `CI_PROJECT_NAME`     | Name of Project                          | `ci-docker-build` `ci-docker-push`       |
+| `CI_PROJECT_PATH`     | Namespace and Project Name               | `ci-git-node-release` `ci-git-shell-release` |
+| `DOCKER_ORGANIZATION` | Name of Docker Organization              | `ci-docker-build` `ci-docker-push`       |
+| `DOCKER_PASSWORD`     | Docker Password                          | `ci-docker-login`                        |
+| `DOCKER_USERNAME`     | Docker Username                          | `ci-docker-login`                        |
+| `GIT_USER_EMAIL`      | Git User Email                           | `ci-git-config`                          |
+| `GIT_USER_NAME`       | Git User Name                            | `ci-git-config`                          |
+| `NPM_TOKEN`           | NPM Token for Publishing Project Package | `ci-node-auth-token` `ci-node-publish`   |
+| `SSH_PRIVATE_KEY`     | Private SSH Key for Pushing Git Commits  | `ci-git-node-release` `ci-git-shell-release` |
+
 ## License
 
 The MIT License (MIT)
