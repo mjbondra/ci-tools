@@ -14,6 +14,9 @@ replace_slash () { echo "${1//\//-}"; }
 chmod -R 755 "$CI_LIB"
 mkdir -p "$CI_BIN_TMP"
 
+git add "$CI_LIB"
+git commit -m "[ci skip] update permissions"
+
 while read -r -d "" CI_SCRIPT
 do
   CI_SCRIPT_ALIAS="$(replace_prefix "$(remove_extension "$(replace_slash "$CI_SCRIPT")")")"
@@ -25,3 +28,6 @@ done < <(find lib -name "*.sh" -print0)
 
 rm -rf "$CI_BIN"
 mv "$CI_BIN_TMP" "$CI_BIN"
+
+git add "$CI_BIN"
+git commit -m "[ci skip] update executables"
