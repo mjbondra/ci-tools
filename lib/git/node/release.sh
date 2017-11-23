@@ -9,7 +9,8 @@ CI_REPOSITORY_URL="git@gitlab.com:$CI_PROJECT_PATH.git"
 eval "$(ssh-agent -s)"
 ssh-add <(echo "$SSH_PRIVATE_KEY")
 
-git checkout master
+# commit release artifacts
+git add -A
 
 # tagged release and untagged prerelease
 yarn config set version-git-message "release v%s"
