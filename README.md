@@ -89,14 +89,14 @@ docker run \
   - [ci-docker-release](#ci-docker-release)
 - **Git**
   - [ci-git-config](#ci-git-config)
-  - [ci-git-release](#ci-git-release)
+  - [ci-git-release](#ci-git-release-a-artifact-path-t-nodeshell)
 - **Node**
-  - [ci-node-build](#ci-node-build)
+  - [ci-node-build](#ci-node-build-subtask)
   - [ci-node-config](#ci-node-config)
   - [ci-node-install](#ci-node-install)
-  - [ci-node-lint](#ci-node-lint)
+  - [ci-node-lint](#ci-node-lint-subtask)
   - [ci-node-release](#ci-node-release)
-  - [ci-node-test](#ci-node-test)
+  - [ci-node-test](#ci-node-test-subtask)
 - **Shell**
   - [ci-shell-lint](#ci-shell-lint)
 
