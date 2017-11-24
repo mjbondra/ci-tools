@@ -1,3 +1,10 @@
 #!/bin/bash
 
-yarn run build
+SUBTASK="$1"
+
+if [ -n "$SUBTASK" ]
+then
+  yarn run "build:$SUBTASK"
+else
+  yarn run build
+fi
