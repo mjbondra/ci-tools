@@ -4,7 +4,7 @@ services:
   - docker:dind
 
 stages:
-  - test
+  - lint
   - deploy
 
 before_script:
@@ -15,7 +15,7 @@ lint:
     -w "/opt/ci-tools"
     "${TEST_TAG}"
     /bin/bash -c "ci-shell-lint"
-  stage: test
+  stage: lint
 
 release:
   only:
@@ -28,7 +28,7 @@ release:
     -e SSH_PRIVATE_KEY
     -w "/opt/ci-tools"
     "${TEST_TAG}"
-    /bin/bash -c "ci-git-config && ci-git-shell-release"
+    /bin/bash -c "ci-git-config && ci-git-release -t shell -a bin -a lib"
   stage: deploy
 
 publish:
@@ -43,7 +43,7 @@ publish:
     -v "/var/run/docker.sock:/var/run/docker.sock"
     -w "/opt/ci-tools"
     "${TEST_TAG}"
-    /bin/bash -c "ci-docker-build && ci-docker-login && ci-docker-push"
+    /bin/bash -c "ci-docker-build && ci-docker-config && ci-docker-release"
   stage: deploy
 
 variables:
