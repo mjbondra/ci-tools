@@ -27,7 +27,9 @@ while getopts 'a:t:' FLAG; do
         exit 1
       fi
       ;;
-    *) error "Unexpected option $FLAG" ;;
+    *)
+      echo "Unexpected option $FLAG" >&2
+      ;;
   esac
 done
 
