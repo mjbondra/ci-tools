@@ -132,11 +132,11 @@ docker run \
 
 ### `ci-git-config`
 
-**Description:** Configures user name, user email, and SSH access for git.
+**Description:** Configures global user name and email for git.
 
 **Prerequisites:** None
 
-**[Environment Variables](#environment-variables):** `GIT_USER_EMAIL` `GIT_USER_NAME` `SSH_PRIVATE_KEY`
+**[Environment Variables](#environment-variables):** `GIT_USER_EMAIL` `GIT_USER_NAME`
 
 **Arguments:** None
 
@@ -146,7 +146,7 @@ docker run \
 
 **Prerequisites:** [`ci-git-config`](#ci-git-config)
 
-**[Environment Variables](#environment-variables):** `CI_PROJECT_PATH` `CI_COMMIT_REF_NAME`
+**[Environment Variables](#environment-variables):** `CI_PROJECT_PATH` `CI_COMMIT_REF_NAME` `SSH_PRIVATE_KEY`
 
 **Arguments:**
 
@@ -253,7 +253,7 @@ docker run \
 | `GIT_USER_EMAIL`      | Git User Email                           | `ci-git-config`                       |
 | `GIT_USER_NAME`       | Git User Name                            | `ci-git-config`                       |
 | `NPM_TOKEN`           | NPM Token for Publishing Project Package | `ci-node-config`                      |
-| `SSH_PRIVATE_KEY`     | Private SSH Key for Pushing Git Commits  | `ci-git-config`                       |
+| `SSH_PRIVATE_KEY`     | Private SSH Key for Pushing Git Commits  | `ci-git-release`                      |
 
 \* these variables are predefined if you are using GitLab CI
 
