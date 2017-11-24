@@ -95,6 +95,7 @@ ci-git-shell-release
 
 # node.js
 ci-node-auth-token
+ci-node-build
 ci-node-install
 ci-node-integration-tests
 ci-node-lint

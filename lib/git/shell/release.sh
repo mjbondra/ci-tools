@@ -9,7 +9,8 @@ CI_REPOSITORY_URL="git@gitlab.com:$CI_PROJECT_PATH.git"
 eval "$(ssh-agent -s)"
 ssh-add <(echo "$SSH_PRIVATE_KEY")
 
-git checkout master
+# commit release artifacts
+git add -A
 
 # tagged release
 RELEASE_VERSION="$(git tag | wondermonger-version \
