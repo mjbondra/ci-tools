@@ -100,9 +100,6 @@ docker run \
 - **Shell**
   - [ci-shell-lint](#ci-shell-lint)
 
-
-
-
 ### `ci-docker-build`
 
 **Description:** Builds and tags a docker image from the current working directory.
@@ -112,8 +109,6 @@ docker run \
 [**Environment Variables:**](#environment-variables) `CI_COMMIT_TAG` `CI_PROJECT_NAME` `DOCKER_ORGANIZATION`
 
 **Arguments:** None
-
-
 
 ### `ci-docker-config`
 
@@ -125,8 +120,6 @@ docker run \
 
 **Arguments:** None
 
-
-
 ### `ci-docker-release`
 
 **Description:** Publishes an image to the Docker registry.
@@ -137,8 +130,6 @@ docker run \
 
 **Arguments:** None
 
-
-
 ### `ci-git-config`
 
 **Description:** Configures user name, user email, and SSH access for git.
@@ -148,8 +139,6 @@ docker run \
 [**Environment Variables:**](#environment-variables) `GIT_USER_EMAIL` `GIT_USER_NAME` `SSH_PRIVATE_KEY`
 
 **Arguments:** None
-
-
 
 ### `ci-git-release [-a <artifact path>] [-t <node|shell>]`
 
@@ -163,20 +152,16 @@ docker run \
 
 - **`-a` :** path to uncommitted **artifact(s)** that should be included in the release
   - use the `-a` flag multiple times to specify multiple artifacts
-    - **Example:** `ci-git-release -a lib -a bin`
+  - **Example:** `ci-git-release -a lib -a bin`
 - **`-t` :** **type** of release
   - either `node` for node projects, or `shell` for everything else
   - default value is `node`
-
-
-
-
 
 ### `ci-node-build [<subtask>]`
 
 **Description:** Executes the `build` script specified in `package.json`.
 
-**Prerequisites:** None
+**Prerequisites:** [`ci-node-install`](#ci-node-install)
 
 [**Environment Variables:**](#environment-variables) None
 
@@ -184,23 +169,17 @@ docker run \
 
 - **`<subtask>` :** optional script execution modifier
   - Executes a script called `build:<subtask>` specified in `package.json`
-    - **Example:** `ci-node-build docs` executes `build:docs`
-
-
-
-
+  - **Example:** `ci-node-build docs` executes `build:docs`
 
 ### `ci-node-config`
 
-**Description:** Specifies an auth token to use for publishing packages to the default NPM registry.
+**Description:** Specifies an auth token to use for publishing packages to the default npm registry.
 
 **Prerequisites:** None
 
 [**Environment Variables:**](#environment-variables) `NPM_TOKEN`
 
 **Arguments:** None
-
-
 
 ### `ci-node-install`
 
@@ -212,13 +191,11 @@ docker run \
 
 **Arguments:** None
 
-
-
 ### `ci-node-lint [<subtask>]`
 
 **Description:** Executes the `lint` script specified in `package.json`.
 
-**Prerequisites:** None
+**Prerequisites:** [`ci-node-install`](#ci-node-install)
 
 [**Environment Variables:**](#environment-variables) None
 
@@ -226,17 +203,23 @@ docker run \
 
 - **`<subtask>` :** optional script execution modifier
   - Executes a script called `lint:<subtask>` specified in `package.json`
-    - **Example:** `ci-node-build lib` executes `lint:lib`
+  - **Example:** `ci-node-build lib` executes `lint:lib`
 
+### `ci-node-release`
 
+**Description:** Publishes a package to the default npm registry.
 
+**Prerequisites:** [`ci-node-config`](#ci-node-config)
 
+[**Environment Variables:**](#environment-variables) None
+
+**Arguments:** None
 
 ### `ci-node-test [<subtask>]`
 
 **Description:** Executes the `test` script specified in `package.json`.
 
-**Prerequisites:** None
+**Prerequisites:** [`ci-node-install`](#ci-node-install)
 
 [**Environment Variables:**](#environment-variables) None
 
@@ -244,11 +227,7 @@ docker run \
 
 - **`<subtask>` :** optional script execution modifier
   - Executes a script called `test:<subtask>` specified in `package.json`
-    - **Example:** `ci-node-build unit` executes `test:unit`
-
-
-
-
+  - **Example:** `ci-node-build unit` executes `test:unit`
 
 ### `ci-shell-lint`
 
@@ -259,8 +238,6 @@ docker run \
 [**Environment Variables:**](#environment-variables) None
 
 **Arguments:** None
-
-
 
 ## Environment Variables
 
