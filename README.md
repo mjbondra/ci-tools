@@ -106,7 +106,7 @@ docker run \
 
 **Prerequisites:** None
 
-[**Environment Variables:**](#environment-variables) `CI_COMMIT_TAG` `CI_PROJECT_NAME` `DOCKER_ORGANIZATION`
+**[Environment Variables](#environment-variables):** `CI_COMMIT_TAG` `CI_PROJECT_NAME` `DOCKER_ORGANIZATION`
 
 **Arguments:** None
 
@@ -116,7 +116,7 @@ docker run \
 
 **Prerequisites:** None
 
-[**Environment Variables:**](#environment-variables) `DOCKER_PASSWORD` `DOCKER_USERNAME`
+**[Environment Variables](#environment-variables):** `DOCKER_PASSWORD` `DOCKER_USERNAME`
 
 **Arguments:** None
 
@@ -126,7 +126,7 @@ docker run \
 
 **Prerequisites:** [`ci-docker-config`](#ci-docker-config)
 
-[**Environment Variables:**](#environment-variables) `CI_PROJECT_NAME` `DOCKER_ORGANIZATION`
+**[Environment Variables](#environment-variables):** `CI_PROJECT_NAME` `DOCKER_ORGANIZATION`
 
 **Arguments:** None
 
@@ -136,7 +136,7 @@ docker run \
 
 **Prerequisites:** None
 
-[**Environment Variables:**](#environment-variables) `GIT_USER_EMAIL` `GIT_USER_NAME` `SSH_PRIVATE_KEY`
+**[Environment Variables](#environment-variables):** `GIT_USER_EMAIL` `GIT_USER_NAME` `SSH_PRIVATE_KEY`
 
 **Arguments:** None
 
@@ -146,7 +146,7 @@ docker run \
 
 **Prerequisites:** [`ci-git-config`](#ci-git-config)
 
-[**Environment Variables:**](#environment-variables) `CI_PROJECT_PATH` `CI_COMMIT_REF_NAME`
+**[Environment Variables](#environment-variables):** `CI_PROJECT_PATH` `CI_COMMIT_REF_NAME`
 
 **Arguments:**
 
@@ -163,7 +163,7 @@ docker run \
 
 **Prerequisites:** [`ci-node-install`](#ci-node-install)
 
-[**Environment Variables:**](#environment-variables) None
+**[Environment Variables](#environment-variables):** None
 
 **Arguments:**
 
@@ -177,7 +177,7 @@ docker run \
 
 **Prerequisites:** None
 
-[**Environment Variables:**](#environment-variables) `NPM_TOKEN`
+**[Environment Variables](#environment-variables):** `NPM_TOKEN`
 
 **Arguments:** None
 
@@ -187,7 +187,7 @@ docker run \
 
 **Prerequisites:** None
 
-[**Environment Variables:**](#environment-variables) None
+**[Environment Variables](#environment-variables):** None
 
 **Arguments:** None
 
@@ -197,13 +197,13 @@ docker run \
 
 **Prerequisites:** [`ci-node-install`](#ci-node-install)
 
-[**Environment Variables:**](#environment-variables) None
+**[Environment Variables](#environment-variables):** None
 
 **Arguments:**
 
 - **`<subtask>` :** optional script execution modifier
   - Executes a script called `lint:<subtask>` specified in `package.json`
-  - **Example:** `ci-node-build lib` executes `lint:lib`
+  - **Example:** `ci-node-lint lib` executes `lint:lib`
 
 ### `ci-node-release`
 
@@ -211,7 +211,7 @@ docker run \
 
 **Prerequisites:** [`ci-node-config`](#ci-node-config)
 
-[**Environment Variables:**](#environment-variables) None
+**[Environment Variables](#environment-variables):** None
 
 **Arguments:** None
 
@@ -221,13 +221,13 @@ docker run \
 
 **Prerequisites:** [`ci-node-install`](#ci-node-install)
 
-[**Environment Variables:**](#environment-variables) None
+**[Environment Variables](#environment-variables):** None
 
 **Arguments:**
 
 - **`<subtask>` :** optional script execution modifier
   - Executes a script called `test:<subtask>` specified in `package.json`
-  - **Example:** `ci-node-build unit` executes `test:unit`
+  - **Example:** `ci-node-test unit` executes `test:unit`
 
 ### `ci-shell-lint`
 
@@ -235,7 +235,7 @@ docker run \
 
 **Prerequisites:** None
 
-[**Environment Variables:**](#environment-variables) None
+**[Environment Variables](#environment-variables):** None
 
 **Arguments:** None
 
