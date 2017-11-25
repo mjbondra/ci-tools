@@ -11,7 +11,7 @@ Use it in a GitLab CI/CD Pipeline.
 **Example `.gitlab-ci.yml`**
 
 ```yaml
-image: wondermonger/ci-tools:latest
+image: wondermonger/ci-tools:v2
 
 stages:
   - install
@@ -80,6 +80,18 @@ docker run \
   /bin/bash -c "ci-git-config && ci-git-release -t shell -a lib -a bin"
 
 ```
+
+**Available Images**
+
+| Tag Pattern         | Description                              | Examples                                |
+| ------------------- | ---------------------------------------- | --------------------------------------- |
+| `latest`            | Latest Release                           | `latest`                                |
+| `vX`                | Latest Minor or Patch Release Within a Given Major Version | `v2`                                    |
+| `vX.Y`              | Latest Patch Release Within a Given Minor Version | `v2.0` `v2.1`                           |
+| `vX.Y.Z`            | Specific Patch Releases                  | `v2.0.0` `v2.1.0` `v2.1.1`              |
+| `vX.Y.Z-prerelease` | Specific Prereleases\*                   | `v2.0.0-0` `v2.1.0-alpha` `v2.1.1-beta` |
+
+\* if prereleases are published, they should not be used for anything other than development
 
 ## CI/CD Scripts
 
