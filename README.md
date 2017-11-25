@@ -88,8 +88,8 @@ docker run \
 | `latest`            | Latest Release                           | `latest`                                |
 | `vX`                | Latest Minor or Patch Release Within a Given Major Version | `v2`                                    |
 | `vX.Y`              | Latest Patch Release Within a Given Minor Version | `v2.0` `v2.1`                           |
-| `vX.Y.Z`            | Specific Patch Releases                  | `v2.0.0` `v2.1.0` `v2.1.1`              |
-| `vX.Y.Z-prerelease` | Specific Prereleases\*                   | `v2.0.0-0` `v2.1.0-alpha` `v2.1.1-beta` |
+| `vX.Y.Z`            | Specific Patch Release                   | `v2.0.0` `v2.1.0` `v2.1.1`              |
+| `vX.Y.Z-prerelease` | Specific Prerelease\*                    | `v2.0.0-0` `v2.1.0-alpha` `v2.1.1-beta` |
 
 \* if prereleases are published, they should not be used for anything other than development
 
