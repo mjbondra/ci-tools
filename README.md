@@ -107,6 +107,7 @@ docker run \
   - [ci-node-config](#ci-node-config)
   - [ci-node-install](#ci-node-install)
   - [ci-node-lint](#ci-node-lint-subtask)
+  - [ci-node-outdated](#ci-node-outdated)
   - [ci-node-release](#ci-node-release)
   - [ci-node-test](#ci-node-test-subtask)
 - **Shell**
@@ -216,6 +217,16 @@ docker run \
 - **`<subtask>` :** optional script execution modifier
   - Executes a script called `lint:<subtask>` specified in `package.json`
   - **Example:** `ci-node-lint lib` executes `lint:lib`
+
+### `ci-node-outdated`
+
+**Description:** Executes `yarn outdated` to check for outdated dependencies.
+
+**Prerequisites:** [`ci-node-install`](#ci-node-install)
+
+**[Environment Variables](#environment-variables):** None
+
+**Arguments:** None
 
 ### `ci-node-release`
 
