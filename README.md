@@ -27,6 +27,11 @@ install:
   script: ci-node-install
   stage: install
 
+outdated:
+  allow_failure: true
+  script: ci-node-outdated
+  stage: install
+
 lint:
   script: ci-node-lint
   stage: lint
@@ -34,7 +39,7 @@ lint:
 documentation:
   artifacts:
     paths:
-      - docs/rules/
+      - docs/
   script: ci-node-build docs
   stage: build
 
@@ -51,7 +56,7 @@ release:
     - master
   script:
     - ci-git-config
-    - ci-git-release -a docs/rules
+    - ci-git-release -a docs
   stage: deploy
 
 publish:
@@ -222,7 +227,7 @@ docker run \
 
 **Description:** Executes `yarn outdated` to check for outdated dependencies.
 
-**Prerequisites:** [`ci-node-install`](#ci-node-install)
+**Prerequisites:** None
 
 **[Environment Variables](#environment-variables):** None
 
