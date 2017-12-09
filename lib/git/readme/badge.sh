@@ -45,15 +45,15 @@ then
 fi
 
 NEXT_VERSION="$(echo "$CURRENT_VERSION" | wondermonger-version --prefix "v" --new-version patch)"
-BADGE_IMAGE_REGEX="(https:\/\/gitlab\.com\/$CI_PROJECT_PATH\/badges\/)([a-zA-Z0-9.-]*)(\/$BADGE\.svg)"
+BADGE_IMAGE_REGEX="(https://gitlab.com/$CI_PROJECT_PATH/badges/)([a-zA-Z0-9.-]*)(/$BADGE.svg)"
 
 if [ "$BADGE" == "pipeline" ]
 then
-  BADGE_LINK_REGEX="(https:\/\/gitlab\.com\/$CI_PROJECT_PATH\/commits\/)([a-zA-Z0-9.-]*)"
+  BADGE_LINK_REGEX="(https://gitlab.com/$CI_PROJECT_PATH/commits/)([a-zA-Z0-9.-]*)"
   BADGE_LINK_ID_REPLACEMENT="$NEXT_VERSION"
 elif [ "$BADGE" == "coverage" ]
 then
-  BADGE_LINK_REGEX="(https:\/\/$CI_PROJECT_NAMESPACE\.gitlab\.io\/-\/$CI_PROJECT_NAME\/-\/jobs\/)([0-9]*)(\/artifacts\/coverage\/index\.html)"
+  BADGE_LINK_REGEX="(https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/)([0-9]*)(/artifacts/coverage/index.html)"
   BADGE_LINK_ID_REPLACEMENT="$CI_JOB_ID"
 fi
 
