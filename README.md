@@ -67,7 +67,7 @@ release:
     - master
   script:
     - ci-git-config
-    - ci-git-release -a docs
+    - ci-git-release -a docs -a README.md
   stage: deploy
 
 publish:
