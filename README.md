@@ -176,7 +176,7 @@ docker run \
 
 **Prerequisites:** None
 
-**[Environment Variables](#environment-variables):** `CI_JOB_ID` `CI_PROJECT_NAME` `CI_PROJECT_NAMESPACE` `CI_PROJECT_PATH`
+**[Environment Variables](#environment-variables):** `CI_JOB_ID` `CI_PIPELINE_ID` `CI_PROJECT_NAME` `CI_PROJECT_NAMESPACE` `CI_PROJECT_PATH`
 
 **Arguments:**
 
@@ -302,6 +302,7 @@ docker run \
 | `CI_COMMIT_TAG`*        | Version Tag                              | `ci-docker-build`                        |
 | `CI_COMMIT_REF_NAME`*   | Branch or Tag Name                       | `ci-git-release`                         |
 | `CI_JOB_ID`*            | GitLab CI Job ID                         | `ci-git-readme-badge`                    |
+| `CI_PIPELINE_ID`*       | GitLab CI Pipeline ID                    | `ci-git-readme-badge`                    |
 | `CI_PROJECT_NAME`*      | Name of Project                          | `ci-docker-build` `ci-docker-release` `ci-git-readme-badge` |
 | `CI_PROJECT_NAMESPACE`* | Namespace of Project                     | `ci-git-readme-badge`                    |
 | `CI_PROJECT_PATH`*      | Namespace and Project Name               | `ci-git-readme-badge` `ci-git-release`   |
