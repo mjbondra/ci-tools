@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:10-alpine
 
 ENV CI_TOOLS_PATH "/opt/ci-tools"
 ENV CI_TOOLS_EXECUTABLE_PATH "$CI_TOOLS_PATH/bin"
