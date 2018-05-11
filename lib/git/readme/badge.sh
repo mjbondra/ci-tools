@@ -1,5 +1,6 @@
 #!/bin/bash
 
+: "${CI_COMMIT_REF_NAME:?ci commit ref name is not set}"
 : "${CI_JOB_ID:?ci job id is not set}"
 : "${CI_PIPELINE_ID:?ci pipeline id is not set}"
 : "${CI_PROJECT_NAME:?ci project name is not set}"
@@ -9,21 +10,13 @@
 README_MARKDOWN="$(cat README.md)"
 
 # parse arguments
-while getopts 'b:t:' FLAG; do
+while getopts 'b:' FLAG; do
   case "$FLAG" in
     b)
       BADGE="$OPTARG"
       if [ "$BADGE" != "coverage" ] && [ "$BADGE" != "pipeline" ]
       then
         echo "\"$BADGE\" is not a valid badge" >&2
-        exit 1
-      fi
-      ;;
-    t)
-      TYPE="$OPTARG"
-      if [ "$TYPE" != "node" ] && [ "$TYPE" != "shell" ]
-      then
-        echo "\"$TYPE\" is not a valid release type" >&2
         exit 1
       fi
       ;;
@@ -47,18 +40,6 @@ else
   exit 1
 fi
 
-TYPE=${TYPE:-node}
-
-if [ "$TYPE" == "node" ]
-then
-  CURRENT_VERSION="v$(node -p "require('./package.json').version")"
-elif [ "$TYPE" == "shell" ]
-then
-  CURRENT_VERSION="$(cat .version)"
-fi
-
-NEXT_VERSION="$(echo "$CURRENT_VERSION" | wondermonger-version --prefix "v" --new-version patch)"
-
 if [ "$BADGE" == "pipeline" ]
 then
   BADGE_TITLE="pipeline status"
@@ -69,7 +50,7 @@ then
   BADGE_LINK="https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/coverage/index.html"
 fi
 
-BADGE_IMAGE="https://gitlab.com/$CI_PROJECT_PATH/badges/$NEXT_VERSION/$BADGE.svg"
+BADGE_IMAGE="https://gitlab.com/$CI_PROJECT_PATH/badges/$CI_COMMIT_REF_NAME/$BADGE.svg"
 BADGE_REPLACEMENT="[![$BADGE_TITLE]($BADGE_IMAGE)]($BADGE_LINK)"
 README_MARKDOWN_REPLACEMENT="${README_MARKDOWN//"$BADGE_PATTERN"/$BADGE_REPLACEMENT}"
 
