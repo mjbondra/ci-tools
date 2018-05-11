@@ -176,7 +176,7 @@ docker run \
 
 **Prerequisites:** None
 
-**[Environment Variables](#environment-variables):** `CI_COMMIT_REF_NAME` `CI_JOB_ID` `CI_JOB_ID` `CI_PIPELINE_ID` `CI_PROJECT_NAME` `CI_PROJECT_NAMESPACE` `CI_PROJECT_PATH`
+**[Environment Variables](#environment-variables):** `CI_COMMIT_REF_NAME` `CI_JOB_ID` `CI_PIPELINE_ID` `CI_PROJECT_NAME` `CI_PROJECT_NAMESPACE` `CI_PROJECT_PATH`
 
 **Arguments:**
 
