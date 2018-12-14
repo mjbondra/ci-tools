@@ -4,7 +4,7 @@ SUBTASK="$1"
 
 if [ -n "$SUBTASK" ]
 then
-  yarn run "lint:$SUBTASK"
+  npm run "lint:$SUBTASK"
 else
-  yarn run lint
+  npm run lint
 fi
