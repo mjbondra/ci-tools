@@ -11,7 +11,7 @@ Use it in a GitLab CI/CD Pipeline.
 **Example `.gitlab-ci.yml`**
 
 ```yaml
-image: wondermonger/ci-tools:v2
+image: wondermonger/ci-tools:v4
 
 stages:
   - install
@@ -74,8 +74,8 @@ publish:
   only:
     - tags
   script:
-  	- ci-node-config
-  	- ci-node-release
+    - ci-node-config
+    - ci-node-release
   stage: deploy
 
 ```

@@ -4,7 +4,7 @@ SUBTASK="$1"
 
 if [ -n "$SUBTASK" ]
 then
-  yarn run "test:$SUBTASK"
+  npm run "test:$SUBTASK"
 else
-  yarn run test
+  npm run test
 fi
