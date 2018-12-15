@@ -14,7 +14,7 @@ RUN apk update \
        git \
        openssh-client
 
-RUN yarn global add @wondermonger/version
+RUN npm i -g @wondermonger/version
 
 RUN mkdir -p ~/.ssh \
     && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
