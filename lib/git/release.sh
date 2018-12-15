@@ -5,8 +5,8 @@
 : "${SSH_PRIVATE_KEY:?ssh private key not set}"
 
 ARTIFACTS=()
-GIT_SSH_USER=${TYPE:-"git"}
-GIT_SSH_HOST=${TYPE:-"gitlab.com"}
+GIT_SSH_USER=${GIT_SSH_USER:-"git"}
+GIT_SSH_HOST=${GIT_SSH_HOST:-"gitlab.com"}
 CI_REPOSITORY_URL="$GIT_SSH_USER@$GIT_SSH_HOST:$CI_PROJECT_PATH.git"
 
 # parse arguments
