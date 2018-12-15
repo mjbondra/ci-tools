@@ -229,7 +229,7 @@ docker run \
 
 ### `ci-node-install`
 
-**Description:** Executes `yarn` to install package dependencies.
+**Description:** Executes `npm i` to install package dependencies.
 
 **Prerequisites:** None
 
@@ -253,7 +253,7 @@ docker run \
 
 ### `ci-node-outdated`
 
-**Description:** Executes `yarn outdated` to check for outdated dependencies.
+**Description:** Executes `npm outdated` to check for outdated dependencies.
 
 **Prerequisites:** None
 
