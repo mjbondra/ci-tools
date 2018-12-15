@@ -5,7 +5,9 @@
 : "${SSH_PRIVATE_KEY:?ssh private key not set}"
 
 ARTIFACTS=()
-CI_REPOSITORY_URL="git@gitlab.com:$CI_PROJECT_PATH.git"
+GIT_SSH_USER=${TYPE:-"git"}
+GIT_SSH_HOST=${TYPE:-"gitlab.com"}
+CI_REPOSITORY_URL="$GIT_SSH_USER@$GIT_SSH_HOST:$CI_PROJECT_PATH.git"
 
 # parse arguments
 while getopts 'a:t:' FLAG; do
@@ -46,9 +48,8 @@ if [ "$TYPE" == "node" ]
 then
 
   # tagged release and untagged prerelease
-  yarn config set version-git-message "release v%s"
-  yarn version --new-version patch
-  yarn version --no-git-tag-version --new-version prerelease
+  npm version patch -m "release v%s"
+  npm version --no-git-tag-version prerelease
 
   PRERELEASE_VERSION="$(node -p "require('./package.json').version")"
 
