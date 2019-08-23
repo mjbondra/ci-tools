@@ -24,23 +24,23 @@ install:
   artifacts:
     paths:
       - node_modules/
-  script: ci-node-install
+  script: npm i
   stage: install
 
 outdated:
   allow_failure: true
-  script: ci-node-outdated
+  script: npm outdated
   stage: install
 
 lint:
-  script: ci-node-lint
+  script: npm run lint
   stage: lint
 
 documentation:
   artifacts:
     paths:
       - docs/
-  script: ci-node-build docs
+  script: npm run build:docs
   stage: build
 
 coverage:
@@ -49,17 +49,15 @@ coverage:
       - coverage/
       - README.md
   coverage: /All files\s*\|\s*([\d\.]+)/
-  script:
-    - ci-node-test coverage
-    - ci-git-readme-badge -b coverage
+  script: npm run test:coverage
   stage: test
 
 unit:
-  script: ci-node-test unit
+  script: npm run test:unit
   stage: test
 
 integration:
-  script: ci-node-test integration
+  script: npm run test:integration
   stage: test
 
 release:
@@ -67,7 +65,7 @@ release:
     - master
   script:
     - ci-git-config
-    - ci-git-release -a docs -a README.md
+    - ci-git-release -a docs
   stage: deploy
 
 publish:
@@ -77,7 +75,6 @@ publish:
     - ci-node-config
     - ci-node-release
   stage: deploy
-
 ```
 
 **Example `docker run`**
@@ -99,13 +96,13 @@ docker run \
 
 **Available Images**
 
-| Tag Pattern  | Description                              | Examples                                |
-| ------------ | ---------------------------------------- | --------------------------------------- |
-| `latest`     | Latest Release                           | `latest`                                |
+| Tag Pattern  | Description                                                | Examples                                |
+| ------------ | ---------------------------------------------------------- | --------------------------------------- |
+| `latest`     | Latest Release                                             | `latest`                                |
 | `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v2`                                    |
-| `vX.Y`       | Latest Patch Release Within a Given Minor Version | `v2.0` `v2.1`                           |
-| `vX.Y.Z`     | Specific Patch Release                   | `v2.0.0` `v2.1.0` `v2.1.1`              |
-| `vX.Y.Z-A`\* | Specific Prerelease                      | `v2.0.0-0` `v2.1.0-alpha` `v2.1.1-beta` |
+| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v2.0` `v2.1`                           |
+| `vX.Y.Z`     | Specific Patch Release                                     | `v2.0.0` `v2.1.0` `v2.1.1`              |
+| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v2.0.0-0` `v2.1.0-alpha` `v2.1.1-beta` |
 
 \* if prereleases are published, they should not be used for anything other than development
 
@@ -117,16 +114,10 @@ docker run \
   - [ci-docker-release](#ci-docker-release)
 - **Git**
   - [ci-git-config](#ci-git-config)
-  - [ci-git-readme-badge](#ci-git-readme-badge-b-badge-t-type)
   - [ci-git-release](#ci-git-release-a-artifact-t-type)
 - **Node**
-  - [ci-node-build](#ci-node-build-subtask)
   - [ci-node-config](#ci-node-config)
-  - [ci-node-install](#ci-node-install)
-  - [ci-node-lint](#ci-node-lint-subtask)
-  - [ci-node-outdated](#ci-node-outdated)
   - [ci-node-release](#ci-node-release)
-  - [ci-node-test](#ci-node-test-subtask)
 - **Shell**
   - [ci-shell-lint](#ci-shell-lint)
 
@@ -170,22 +161,6 @@ docker run \
 
 **Arguments:** None
 
-### `ci-git-readme-badge [-b <badge>]`
-
-**Description:** Updates the markdown for a pipeline or coverage badge.
-
-**Prerequisites:** None
-
-**[Environment Variables](#environment-variables):** `CI_COMMIT_REF_NAME` `CI_JOB_ID` `CI_PIPELINE_ID` `CI_PROJECT_NAME` `CI_PROJECT_NAMESPACE` `CI_PROJECT_PATH`
-
-**Arguments:**
-
-- **`-b` :** **badge** to update
-  - either `coverage` or `pipeline`
-- **`-t` :** **type** of release
-  - either `node` for node projects, or `shell` for everything else
-  - default value is `node`
-
 ### `ci-git-release [-a <artifact>] [-t <type>]`
 
 **Description:** Creates and pushes a tagged git release.
@@ -203,20 +178,6 @@ docker run \
   - either `node` for node projects, or `shell` for everything else
   - default value is `node`
 
-### `ci-node-build [<subtask>]`
-
-**Description:** Executes the `build` script specified in `package.json`.
-
-**Prerequisites:** [`ci-node-install`](#ci-node-install)
-
-**[Environment Variables](#environment-variables):** None
-
-**Arguments:**
-
-- **`<subtask>` :** optional script execution modifier
-  - Executes a script called `build:<subtask>` specified in `package.json`
-  - **Example:** `ci-node-build docs` executes `build:docs`
-
 ### `ci-node-config`
 
 **Description:** Specifies an auth token to use for publishing packages to the default npm registry.
@@ -224,40 +185,6 @@ docker run \
 **Prerequisites:** None
 
 **[Environment Variables](#environment-variables):** `NPM_TOKEN`
-
-**Arguments:** None
-
-### `ci-node-install`
-
-**Description:** Executes `npm i` to install package dependencies.
-
-**Prerequisites:** None
-
-**[Environment Variables](#environment-variables):** None
-
-**Arguments:** None
-
-### `ci-node-lint [<subtask>]`
-
-**Description:** Executes the `lint` script specified in `package.json`.
-
-**Prerequisites:** [`ci-node-install`](#ci-node-install)
-
-**[Environment Variables](#environment-variables):** None
-
-**Arguments:**
-
-- **`<subtask>` :** optional script execution modifier
-  - Executes a script called `lint:<subtask>` specified in `package.json`
-  - **Example:** `ci-node-lint lib` executes `lint:lib`
-
-### `ci-node-outdated`
-
-**Description:** Executes `npm outdated` to check for outdated dependencies.
-
-**Prerequisites:** None
-
-**[Environment Variables](#environment-variables):** None
 
 **Arguments:** None
 
@@ -271,20 +198,6 @@ docker run \
 
 **Arguments:** None
 
-### `ci-node-test [<subtask>]`
-
-**Description:** Executes the `test` script specified in `package.json`.
-
-**Prerequisites:** [`ci-node-install`](#ci-node-install)
-
-**[Environment Variables](#environment-variables):** None
-
-**Arguments:**
-
-- **`<subtask>` :** optional script execution modifier
-  - Executes a script called `test:<subtask>` specified in `package.json`
-  - **Example:** `ci-node-test unit` executes `test:unit`
-
 ### `ci-shell-lint`
 
 **Description:** Executes [`shellcheck`](https://github.com/koalaman/shellcheck) against all shell scripts in a given project.
@@ -297,22 +210,22 @@ docker run \
 
 ## Environment Variables
 
-| Variable                | Description                              | Required By                              |
-| ----------------------- | ---------------------------------------- | ---------------------------------------- |
-| `CI_COMMIT_TAG`*        | Version Tag                              | `ci-docker-build`                        |
-| `CI_COMMIT_REF_NAME`*   | Branch or Tag Name                       | `ci-git-release`, `ci-git-readme-badge`  |
-| `CI_JOB_ID`*            | GitLab CI Job ID                         | `ci-git-readme-badge`                    |
-| `CI_PIPELINE_ID`*       | GitLab CI Pipeline ID                    | `ci-git-readme-badge`                    |
-| `CI_PROJECT_NAME`*      | Name of Project                          | `ci-docker-build` `ci-docker-release` `ci-git-readme-badge` |
-| `CI_PROJECT_NAMESPACE`* | Namespace of Project                     | `ci-git-readme-badge`                    |
-| `CI_PROJECT_PATH`*      | Namespace and Project Name               | `ci-git-readme-badge` `ci-git-release`   |
-| `DOCKER_ORGANIZATION`   | Name of Docker Organization              | `ci-docker-build` `ci-docker-release`    |
-| `DOCKER_PASSWORD`       | Docker Password                          | `ci-docker-config`                       |
-| `DOCKER_USERNAME`       | Docker Username                          | `ci-docker-config`                       |
-| `GIT_USER_EMAIL`        | Git User Email                           | `ci-git-config`                          |
-| `GIT_USER_NAME`         | Git User Name                            | `ci-git-config`                          |
-| `NPM_TOKEN`             | NPM Token for Publishing Project Package | `ci-node-config`                         |
-| `SSH_PRIVATE_KEY`       | Private SSH Key for Pushing Git Commits  | `ci-git-release`                         |
+| Variable                 | Description                              | Required By                                                 |
+| ------------------------ | ---------------------------------------- | ----------------------------------------------------------- |
+| `CI_COMMIT_TAG`\*        | Version Tag                              | `ci-docker-build`                                           |
+| `CI_COMMIT_REF_NAME`\*   | Branch or Tag Name                       | `ci-git-release`, `ci-git-readme-badge`                     |
+| `CI_JOB_ID`\*            | GitLab CI Job ID                         | `ci-git-readme-badge`                                       |
+| `CI_PIPELINE_ID`\*       | GitLab CI Pipeline ID                    | `ci-git-readme-badge`                                       |
+| `CI_PROJECT_NAME`\*      | Name of Project                          | `ci-docker-build` `ci-docker-release` `ci-git-readme-badge` |
+| `CI_PROJECT_NAMESPACE`\* | Namespace of Project                     | `ci-git-readme-badge`                                       |
+| `CI_PROJECT_PATH`\*      | Namespace and Project Name               | `ci-git-readme-badge` `ci-git-release`                      |
+| `DOCKER_ORGANIZATION`    | Name of Docker Organization              | `ci-docker-build` `ci-docker-release`                       |
+| `DOCKER_PASSWORD`        | Docker Password                          | `ci-docker-config`                                          |
+| `DOCKER_USERNAME`        | Docker Username                          | `ci-docker-config`                                          |
+| `GIT_USER_EMAIL`         | Git User Email                           | `ci-git-config`                                             |
+| `GIT_USER_NAME`          | Git User Name                            | `ci-git-config`                                             |
+| `NPM_TOKEN`              | NPM Token for Publishing Project Package | `ci-node-config`                                            |
+| `SSH_PRIVATE_KEY`        | Private SSH Key for Pushing Git Commits  | `ci-git-release`                                            |
 
 \* these variables are predefined if you are using GitLab CI
 
@@ -320,7 +233,7 @@ docker run \
 
 The MIT License (MIT)
 
-Copyright (c) 2017-2018 Michael J. Bondra <mjbondra@gmail.com>
+Copyright (c) 2017-2019 Michael J. Bondra <mjbondra@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
