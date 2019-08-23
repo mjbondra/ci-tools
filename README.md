@@ -11,70 +11,16 @@ Use it in a GitLab CI/CD Pipeline.
 **Example `.gitlab-ci.yml`**
 
 ```yaml
-image: wondermonger/ci-tools:v4
-
-stages:
-  - install
-  - lint
-  - build
-  - test
-  - deploy
-
-install:
-  artifacts:
-    paths:
-      - node_modules/
-  script: npm i
-  stage: install
-
-outdated:
-  allow_failure: true
-  script: npm outdated
-  stage: install
-
-lint:
-  script: npm run lint
-  stage: lint
+include:
+  - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/simple.yml
 
 documentation:
   artifacts:
-    paths:
-      - docs/
+  paths:
+    - docs/
   script: npm run build:docs
   stage: build
-
-coverage:
-  artifacts:
-    paths:
-      - coverage/
-      - README.md
-  coverage: /All files\s*\|\s*([\d\.]+)/
-  script: npm run test:coverage
-  stage: test
-
-unit:
-  script: npm run test:unit
-  stage: test
-
-integration:
-  script: npm run test:integration
-  stage: test
-
-release:
-  only:
-    - master
-  script:
-    - ci-git-config
-    - ci-git-release -a docs
-  stage: deploy
-
-publish:
-  only:
-    - tags
-  script:
-    - ci-node-config
-    - ci-node-release
-  stage: deploy
 ```
 
 **Example `docker run`**
@@ -210,22 +156,19 @@ docker run \
 
 ## Environment Variables
 
-| Variable                 | Description                              | Required By                                                 |
-| ------------------------ | ---------------------------------------- | ----------------------------------------------------------- |
-| `CI_COMMIT_TAG`\*        | Version Tag                              | `ci-docker-build`                                           |
-| `CI_COMMIT_REF_NAME`\*   | Branch or Tag Name                       | `ci-git-release`, `ci-git-readme-badge`                     |
-| `CI_JOB_ID`\*            | GitLab CI Job ID                         | `ci-git-readme-badge`                                       |
-| `CI_PIPELINE_ID`\*       | GitLab CI Pipeline ID                    | `ci-git-readme-badge`                                       |
-| `CI_PROJECT_NAME`\*      | Name of Project                          | `ci-docker-build` `ci-docker-release` `ci-git-readme-badge` |
-| `CI_PROJECT_NAMESPACE`\* | Namespace of Project                     | `ci-git-readme-badge`                                       |
-| `CI_PROJECT_PATH`\*      | Namespace and Project Name               | `ci-git-readme-badge` `ci-git-release`                      |
-| `DOCKER_ORGANIZATION`    | Name of Docker Organization              | `ci-docker-build` `ci-docker-release`                       |
-| `DOCKER_PASSWORD`        | Docker Password                          | `ci-docker-config`                                          |
-| `DOCKER_USERNAME`        | Docker Username                          | `ci-docker-config`                                          |
-| `GIT_USER_EMAIL`         | Git User Email                           | `ci-git-config`                                             |
-| `GIT_USER_NAME`          | Git User Name                            | `ci-git-config`                                             |
-| `NPM_TOKEN`              | NPM Token for Publishing Project Package | `ci-node-config`                                            |
-| `SSH_PRIVATE_KEY`        | Private SSH Key for Pushing Git Commits  | `ci-git-release`                                            |
+| Variable               | Description                              | Required By                           |
+| ---------------------- | ---------------------------------------- | ------------------------------------- |
+| `CI_COMMIT_TAG`\*      | Version Tag                              | `ci-docker-build`                     |
+| `CI_COMMIT_REF_NAME`\* | Branch or Tag Name                       | `ci-git-release`                      |
+| `CI_PROJECT_NAME`\*    | Name of Project                          | `ci-docker-build` `ci-docker-release` |
+| `CI_PROJECT_PATH`\*    | Namespace and Project Name               | `ci-git-release`                      |
+| `DOCKER_ORGANIZATION`  | Name of Docker Organization              | `ci-docker-build` `ci-docker-release` |
+| `DOCKER_PASSWORD`      | Docker Password                          | `ci-docker-config`                    |
+| `DOCKER_USERNAME`      | Docker Username                          | `ci-docker-config`                    |
+| `GIT_USER_EMAIL`       | Git User Email                           | `ci-git-config`                       |
+| `GIT_USER_NAME`        | Git User Name                            | `ci-git-config`                       |
+| `NPM_TOKEN`            | NPM Token for Publishing Project Package | `ci-node-config`                      |
+| `SSH_PRIVATE_KEY`      | Private SSH Key for Pushing Git Commits  | `ci-git-release`                      |
 
 \* these variables are predefined if you are using GitLab CI
 
