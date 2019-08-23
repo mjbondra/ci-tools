@@ -13,6 +13,7 @@ Use it in a GitLab CI/CD Pipeline.
 ```yaml
 include:
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/post-install/lint.yml
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/simple.yml
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/coverage.yml
 
