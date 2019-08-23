@@ -1,0 +1,21 @@
+unit:
+  except:
+    - tags
+  script: npm run test:unit
+  stage: test
+
+integration:
+  except:
+    - tags
+  script: npm run test:integration
+  stage: test
+
+coverage:
+  except:
+    - tags
+  artifacts:
+    paths:
+      - public/coverage/
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  script: npm run test:coverage
+  stage: test

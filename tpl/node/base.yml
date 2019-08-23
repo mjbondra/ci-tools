@@ -1,8 +1,8 @@
-image: wondermonger/ci-tools:v3
+image: wondermonger/ci-tools:v5
 
 stages:
   - install
-  - lint
+  - post-install
   - test
   - build
   - deploy
@@ -13,58 +13,29 @@ install:
   artifacts:
     paths:
       - node_modules/
-  script: ci-node-install
+  script: npm i
   stage: install
+
+audit:
+  except:
+    - tags
+  allow_failure: true
+  script: npm audit
+  stage: post-install
 
 outdated:
   except:
     - tags
   allow_failure: true
-  script: ci-node-outdated
-  stage: install
-
-lint:
-  except:
-    - tags
-  script: ci-node-lint
-  stage: lint
-
-unit:
-  except:
-    - tags
-  script: ci-node-test unit
-  stage: test
-
-integration:
-  except:
-    - tags
-  services:
-    - redis:latest
-  script: ci-node-test integration
-  stage: test
-  variables:
-    REDIS_HOST: redis
-
-coverage:
-  except:
-    - tags
-  artifacts:
-    paths:
-      - coverage/
-      - README.md
-  coverage: /All files\s*\|\s*([\d\.]+)/
-  script:
-    - ci-node-test coverage
-    - ci-git-readme-badge -b coverage
-  stage: test
+  script: npm outdated
+  stage: post-install
 
 release:
   only:
     - master
   script:
     - ci-git-config
-    - ci-git-readme-badge -b pipeline
-    - ci-git-release -a README.md
+    - ci-git-release
   stage: deploy
 
 publish:
