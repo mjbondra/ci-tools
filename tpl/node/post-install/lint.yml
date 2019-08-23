@@ -1,5 +1,5 @@
 lint:
   except:
     - tags
-  scripts: npm run lint
+  script: npm run lint
   stage: post-install
