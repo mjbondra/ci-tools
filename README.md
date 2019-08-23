@@ -14,6 +14,7 @@ Use it in a GitLab CI/CD Pipeline.
 include:
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/simple.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/coverage.yml
 
 documentation:
   artifacts:
