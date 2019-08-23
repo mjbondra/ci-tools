@@ -1,8 +1,0 @@
-documentation:
-  only:
-    - master
-  artifacts:
-    paths:
-      - docs/
-  script: ci-node-build docs
-  stage: build
