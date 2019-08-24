@@ -1,6 +1,6 @@
 # CI Tools
 
-CI/CD image and scripts for [@wondermonger](https://gitlab.com/wondermonger) projects.
+CI/CD image, scripts, and templates for [@wondermonger](https://gitlab.com/wondermonger) projects.
 
 ## Usage
 
@@ -16,13 +16,8 @@ include:
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/post-install/lint.yml
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/simple.yml
   - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/coverage.yml
-
-documentation:
-  artifacts:
-  paths:
-    - docs/
-  script: npm run build:docs
-  stage: build
+  - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/build/public.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/post-build/pages.yml
 ```
 
 **Example `docker run`**
@@ -173,6 +168,19 @@ docker run \
 | `SSH_PRIVATE_KEY`      | Private SSH Key for Pushing Git Commits  | `ci-git-release`                      |
 
 \* these variables are predefined if you are using GitLab CI
+
+## Templates
+
+| URL                                                          | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml | Base template for Node.js projects that provides installation, dependency auditing, outdated dependency notification, patch versioning, git release tagging, and npm publishing. |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/post-install/lint.yml | Invokes `npm run lint` during the `post-install` stage.      |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/simple.yml | Invokes `npm test` during the `test` stage.                  |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/expanded.yml | Invokes `npm run test:integration` and `npm run test:unit` during the `test` stage. |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/test/coverage.yml | Invokes `npm run test:coverage` and extracts coverage data during the `test` stage. This template will persist artifacts created in the `./public/coverage` directory. |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/build/dist.yml | Invokes `npm run build` during the `build` stage. This template will persist artifacts created in the `./dist` directory. |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/build/public.yml | Invokes `npm run build` during the `build` stage. This template will persist artifacts created in the `./public` directory. |
+| https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/post-build/pages.yml | A generic GitLab pages job executed during the `post-build` stage. |
 
 ## License
 
