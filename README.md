@@ -12,12 +12,12 @@ Use it in a GitLab CI/CD Pipeline.
 
 ```yaml
 include:
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/base.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/post-install/lint.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/test/simple.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/test/coverage.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/build/public.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/post-build/pages.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/base.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/post-install/lint.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/test/simple.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/test/coverage.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/build/public.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/post-build/pages.yml
 ```
 
 **Example `docker run`**
@@ -173,7 +173,7 @@ docker run \
 
 When including the templates listed below, versioned templates should be preferred over latest:
 
-**PREFERRED**: https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/base.yml  
+**PREFERRED**: https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/base.yml  
 **LATEST**: https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml
 
 | URL                                                                                | Description                                                                                                                                                                      |
