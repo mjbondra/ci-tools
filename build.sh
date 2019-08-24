@@ -6,6 +6,20 @@ CI_LIB="lib"
 CI_LIB_RELATIVE_BIN="../lib"
 CI_PREFIX="ci"
 
+if [ -n "$CI_COMMIT_TAG" ]
+then
+  IMAGE_VERSION="$CI_COMMIT_TAG"
+else
+  IMAGE_VERSION="$(git tag | wondermonger-version \
+    --version-file .version \
+    --prefix v \
+    --new-version patch)"
+fi
+
+TPL_CI_IMAGE_HEADER="image: wondermonger/ci-tools:${IMAGE_VERSION}"
+TPL_NODE_BASE="${TPL_CI_IMAGE_HEADER}"$'\n'"$(tail -n +2 ./tpl/node/base.yml)"
+echo "$TPL_NODE_BASE" > ./tpl/node/base.yml
+
 get_relative_path () { echo "${1//$CI_LIB/$CI_LIB_RELATIVE_BIN}"; }
 remove_extension () { echo "${1//.sh/}"; }
 replace_prefix () { echo "${1//$CI_LIB/$CI_PREFIX}"; }
