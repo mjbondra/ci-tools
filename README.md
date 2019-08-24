@@ -173,7 +173,7 @@ docker run \
 
 When including the templates listed below, versioned templates should be preferred over latest:
 
-**PREFERRED**: https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/base.yml
+**PREFERRED**: https://gitlab.com/wondermonger/ci-tools/raw/v5.1.0/tpl/node/base.yml  
 **LATEST**: https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml
 
 | URL                                                                                | Description                                                                                                                                                                      |
