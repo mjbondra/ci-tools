@@ -5,6 +5,7 @@ stages:
   - post-install
   - test
   - build
+  - post-build
   - deploy
 
 install:
