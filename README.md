@@ -12,12 +12,12 @@ Use it in a GitLab CI/CD Pipeline.
 
 ```yaml
 include:
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/base.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/post-install/lint.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/test/simple.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/test/coverage.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/build/public.yml
-  - https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/post-build/pages.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/base.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/post-install/lint.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/test/simple.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/test/coverage.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/build/public.yml
+  - https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/post-build/pages.yml
 ```
 
 **Example `docker run`**
@@ -42,10 +42,10 @@ docker run \
 | Tag Pattern  | Description                                                | Examples                                |
 | ------------ | ---------------------------------------------------------- | --------------------------------------- |
 | `latest`     | Latest Release                                             | `latest`                                |
-| `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v5`                                    |
-| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v5.0` `v5.1`                           |
-| `vX.Y.Z`     | Specific Patch Release                                     | `v5.0.0` `v5.1.0` `v5.1.1`              |
-| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v5.0.0-0` `v5.1.0-alpha` `v5.1.1-beta` |
+| `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v6`                                    |
+| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v6.0` `v5.1`                           |
+| `vX.Y.Z`     | Specific Patch Release                                     | `v6.0.0` `v5.1.0` `v4.0.1`              |
+| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v6.0.0-0` `v6.0.0-alpha` `v6.0.0-beta` |
 
 \* if prereleases are published, they should not be used for anything other than development
 
@@ -173,7 +173,7 @@ docker run \
 
 When including the templates listed below, versioned templates should be preferred over latest:
 
-**PREFERRED**: https://gitlab.com/wondermonger/ci-tools/raw/v5.1.2/tpl/node/base.yml  
+**PREFERRED**: https://gitlab.com/wondermonger/ci-tools/raw/v6.0.0/tpl/node/base.yml  
 **LATEST**: https://gitlab.com/wondermonger/ci-tools/raw/master/tpl/node/base.yml
 
 | URL                                                                                | Description                                                                                                                                                                      |
