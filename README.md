@@ -42,10 +42,10 @@ docker run \
 | Tag Pattern  | Description                                                | Examples                                |
 | ------------ | ---------------------------------------------------------- | --------------------------------------- |
 | `latest`     | Latest Release                                             | `latest`                                |
-| `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v6`                                    |
-| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v6.0` `v5.1`                           |
-| `vX.Y.Z`     | Specific Patch Release                                     | `v6.0.0` `v5.1.0` `v4.0.1`              |
-| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v6.0.0-0` `v6.0.0-alpha` `v6.0.0-beta` |
+| `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v6` `v5` `v4`                          |
+| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v6.0` `v5.1` `v4.0`                    |
+| `vX.Y.Z`     | Specific Patch Release                                     | `v6.0.0` `v5.1.2` `v4.0.1`              |
+| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v6.0.0-0` `v5.1.2-alpha` `v4.0.1-beta` |
 
 \* if prereleases are published, they should not be used for anything other than development
 
