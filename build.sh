@@ -6,15 +6,10 @@ CI_LIB="lib"
 CI_LIB_RELATIVE_BIN="../lib"
 CI_PREFIX="ci"
 
-if [ -n "$CI_COMMIT_TAG" ]
-then
-  IMAGE_VERSION="$CI_COMMIT_TAG"
-else
-  IMAGE_VERSION="$(git tag | wondermonger-version \
-    --version-file .version \
-    --prefix v \
-    --new-version patch)"
-fi
+IMAGE_VERSION="$(git tag | wondermonger-version \
+  --version-file .version \
+  --prefix v \
+  --new-version patch)"
 
 TPL_CI_IMAGE_HEADER="image: wondermonger/ci-tools:${IMAGE_VERSION}"
 TPL_NODE_BASE="${TPL_CI_IMAGE_HEADER}"$'\n'"$(tail -n +2 ./tpl/node/base.yml)"
