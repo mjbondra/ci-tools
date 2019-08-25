@@ -19,11 +19,6 @@ RUN npm i -g @wondermonger/version
 RUN mkdir -p ~/.ssh \
     && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
-COPY ./ "$CI_TOOLS_PATH"
-WORKDIR "$CI_TOOLS_PATH"
-RUN ./build.sh
-
+COPY ./ $CI_TOOLS_PATH
 ENV PATH "$CI_TOOLS_EXECUTABLE_PATH:$CI_TOOLS_DEPENDENCY_PATH:$PATH"
-
-WORKDIR /
 CMD ["/bin/bash"]
