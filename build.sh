@@ -6,8 +6,6 @@ CI_LIB="lib"
 CI_LIB_RELATIVE_BIN="../lib"
 CI_PREFIX="ci"
 
-VALID_VERSION_REGEX="^[A-Za-z]*[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]*[0-9A-Za-z]+)*$"
-
 
 # bin filename functions
 get_relative_path () { echo "${1//$CI_LIB/$CI_LIB_RELATIVE_BIN}"; }
@@ -21,7 +19,7 @@ while getopts 'v:' FLAG; do
   case "$FLAG" in
     v)
       RAW_IMAGE_VERSION=${OPTARG/v/}
-      if ! [[ "$RAW_IMAGE_VERSION" =~ $VALID_VERSION_REGEX ]]
+      if ! [[ "$RAW_IMAGE_VERSION" =~ ^[A-Za-z]*[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]*[0-9A-Za-z]+)*$ ]]
       then
         echo "\"${RAW_IMAGE_VERSION}\" is an invalid semantic version" >&2
         exit 1
@@ -45,6 +43,15 @@ IMAGE_VERSION=${IMAGE_VERSION:-$NEXT_PATCH_VERSION}
 TPL_CI_IMAGE_HEADER="image: wondermonger/ci-tools:${IMAGE_VERSION}"
 TPL_NODE_BASE="${TPL_CI_IMAGE_HEADER}"$'\n'"$(tail -n +2 ./tpl/node/base.yml)"
 echo "$TPL_NODE_BASE" > ./tpl/node/base.yml
+
+
+# version readme
+README="$(cat README.md)"
+if [[ "$README" =~ v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]*[0-9A-Za-z]+)* ]]
+then
+  PREVIOUS_VERSION="${BASH_REMATCH[0]}"
+  echo "${README//$PREVIOUS_VERSION/$IMAGE_VERSION}" > README.md
+fi
 
 
 # ensure script permissions 
