@@ -53,7 +53,7 @@ then
 
   PRERELEASE_VERSION="$(node -p "require('./package.json').version")"
 
-  git add package.json
+  git add package.json package-lock.json
   git commit -m "[ci skip] prerelease v${PRERELEASE_VERSION}"
 
 elif [ "$TYPE" == "shell" ]
