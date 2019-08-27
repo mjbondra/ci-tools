@@ -4,5 +4,5 @@ pages:
   artifacts:
     paths:
       - public/
-  script: :
+  script: ":"
   stage: post-build
