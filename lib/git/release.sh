@@ -47,14 +47,18 @@ done
 if [ "$TYPE" == "node" ]
 then
 
-  # tagged release and untagged prerelease
-  npm version patch -m "release v%s"
-  npm version --no-git-tag-version prerelease
-
-  PRERELEASE_VERSION="$(node -p "require('./package.json').version")"
-
+  # tagged release
+  npm version --no-git-tag-version patch
+  RELEASE_VERSION="v$(node -p "require('./package.json').version")"
   git add package.json package-lock.json
-  git commit -m "[ci skip] prerelease v${PRERELEASE_VERSION}"
+  git commit -m "release ${RELEASE_VERSION}"
+  git tag -a "${RELEASE_VERSION}" -m "release ${RELEASE_VERSION}"
+
+  # untagged prerelease
+  npm version --no-git-tag-version prerelease
+  PRERELEASE_VERSION="v$(node -p "require('./package.json').version")"
+  git add package.json package-lock.json
+  git commit -m "[ci skip] prerelease ${PRERELEASE_VERSION}"
 
 elif [ "$TYPE" == "shell" ]
 then
