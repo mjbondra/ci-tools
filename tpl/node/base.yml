@@ -1,4 +1,4 @@
-image: wondermonger/ci-tools:v6.1.0
+image: wondermonger/ci-tools:v7.0.0
 
 stages:
   - install
