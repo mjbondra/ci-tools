@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:12-alpine
 
 ENV CI_TOOLS_PATH "/opt/ci-tools"
 ENV CI_TOOLS_EXECUTABLE_PATH "$CI_TOOLS_PATH/bin"
@@ -8,11 +8,11 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk
 
 RUN apk update \
     && apk add --no-cache \
-       bash \
-       docker \
-       git \
-       openssh-client \
-       shellcheck@edge
+    bash \
+    docker \
+    git \
+    openssh-client \
+    shellcheck@edge
 
 RUN npm i -g @wondermonger/version
 
