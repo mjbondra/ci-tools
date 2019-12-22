@@ -1,4 +1,5 @@
-image: wondermonger/ci-tools:v7.0.0
+.base-default: &base-default
+  image: wondermonger/ci-tools:v7.0.0
 
 stages:
   - install
@@ -9,6 +10,7 @@ stages:
   - deploy
 
 install:
+  <<: *base-default
   except:
     - tags
   artifacts:
@@ -18,6 +20,7 @@ install:
   stage: install
 
 audit:
+  <<: *base-default
   except:
     - tags
   allow_failure: true
@@ -25,6 +28,7 @@ audit:
   stage: post-install
 
 outdated:
+  <<: *base-default
   except:
     - tags
   allow_failure: true
@@ -32,6 +36,7 @@ outdated:
   stage: post-install
 
 release:
+  <<: *base-default
   only:
     - master
   script:
@@ -40,6 +45,7 @@ release:
   stage: deploy
 
 publish:
+  <<: *base-default
   only:
     - tags
   script:
