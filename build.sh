@@ -35,6 +35,7 @@ NEXT_PATCH_VERSION="$(git tag | wondermonger-version \
   --prefix v \
   --new-version patch)"
 
+: "${NEXT_PATCH_VERSION:?"unable to determine next patch version -- ensure @wondermonger/version is installed"}"
 IMAGE_VERSION=${IMAGE_VERSION:-$NEXT_PATCH_VERSION}
 
 # version templates
