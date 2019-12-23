@@ -4,4 +4,4 @@
 
 NPM_REGISTRY=${NPM_REGISTRY:-"registry.npmjs.org"}
 
-echo "//${NPM_REGISTRY}/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+echo "//${NPM_REGISTRY}/:_authToken=${NPM_TOKEN}" >>~/.npmrc
