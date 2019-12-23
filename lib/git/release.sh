@@ -12,40 +12,36 @@ CI_REPOSITORY_URL="$GIT_SSH_USER@$GIT_SSH_HOST:$CI_PROJECT_PATH.git"
 # parse arguments
 while getopts 'a:t:' FLAG; do
   case "$FLAG" in
-    a)
-      ARTIFACT="$OPTARG"
-      if [ -f "$ARTIFACT" ] || [ -d "$ARTIFACT" ]
-      then
-        ARTIFACTS+=("$ARTIFACT")
-      else
-        echo "\"$ARTIFACT\" is not a valid file or directory" >&2
-        exit 1
-      fi
-      ;;
-    t)
-      TYPE="$OPTARG"
-      if [ "$TYPE" != "node" ] && [ "$TYPE" != "shell" ]
-      then
-        echo "\"$TYPE\" is not a valid release type" >&2
-        exit 1
-      fi
-      ;;
-    *)
-      echo "Unexpected option $FLAG" >&2
-      ;;
+  a)
+    ARTIFACT="$OPTARG"
+    if [ -f "$ARTIFACT" ] || [ -d "$ARTIFACT" ]; then
+      ARTIFACTS+=("$ARTIFACT")
+    else
+      echo "\"$ARTIFACT\" is not a valid file or directory" >&2
+      exit 1
+    fi
+    ;;
+  t)
+    TYPE="$OPTARG"
+    if [ "$TYPE" != "node" ] && [ "$TYPE" != "shell" ]; then
+      echo "\"$TYPE\" is not a valid release type" >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Unexpected option $FLAG" >&2
+    ;;
   esac
 done
 
 TYPE=${TYPE:-node}
 
 # stage artifacts for commit
-for ARTIFACT in "${ARTIFACTS[@]}"
-do
+for ARTIFACT in "${ARTIFACTS[@]}"; do
   git add "$ARTIFACT"
 done
 
-if [ "$TYPE" == "node" ]
-then
+if [ "$TYPE" == "node" ]; then
 
   # tagged release
   npm version --no-git-tag-version patch
@@ -60,8 +56,7 @@ then
   git add package.json package-lock.json
   git commit -m "[ci skip] prerelease ${PRERELEASE_VERSION}"
 
-elif [ "$TYPE" == "shell" ]
-then
+elif [ "$TYPE" == "shell" ]; then
 
   # tagged release
   RELEASE_VERSION="$(git tag | wondermonger-version \
@@ -69,7 +64,7 @@ then
     --prefix v \
     --new-version patch)"
 
-  echo "$RELEASE_VERSION" > .version
+  echo "$RELEASE_VERSION" >.version
 
   git add .version
   git commit -m "release ${RELEASE_VERSION}"
@@ -81,7 +76,7 @@ then
     --prefix v \
     --new-version prerelease)"
 
-  echo "$PRERELEASE_VERSION" > .version
+  echo "$PRERELEASE_VERSION" >.version
 
   git add .version
   git commit -m "[ci skip] prerelease ${PRERELEASE_VERSION}"
