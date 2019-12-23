@@ -1,5 +1,5 @@
 test:
-  image: wondermonger/ci-tools:v7.0.0
+  image: wondermonger/ci-tools:v8.0.0
   except:
     - tags
   script: npm test
