@@ -1,5 +1,5 @@
 pages:
-  image: wondermonger/ci-tools:v8.0.0
+  image: wondermonger/ci-tools:v9.0.0
   only:
     - master
   artifacts:

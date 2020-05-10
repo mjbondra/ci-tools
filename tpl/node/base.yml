@@ -1,5 +1,5 @@
 .base-default: &base-default
-  image: wondermonger/ci-tools:v8.0.0
+  image: wondermonger/ci-tools:v9.0.0
 
 stages:
   - install
