@@ -1,10 +1,7 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 ENV CI_TOOLS_PATH "/opt/ci-tools"
 ENV CI_TOOLS_EXECUTABLE_PATH "$CI_TOOLS_PATH/bin"
-
-RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
-RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk update \
     && apk add --no-cache \
@@ -12,7 +9,7 @@ RUN apk update \
     docker \
     git \
     openssh-client \
-    shellcheck@edge
+    shellcheck
 
 RUN npm i -g @wondermonger/version
 
