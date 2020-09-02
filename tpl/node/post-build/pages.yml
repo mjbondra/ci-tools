@@ -1,7 +1,7 @@
 pages:
   image: wondermonger/ci-tools:v9.0.0
-  only:
-    - master
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
   artifacts:
     paths:
       - public/

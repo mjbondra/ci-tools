@@ -1,7 +1,7 @@
 build:
   image: wondermonger/ci-tools:v9.0.0
-  except:
-    - tags
+  rules:
+    - if: $CI_COMMIT_TAG == null
   artifacts:
     paths:
       - dist/
