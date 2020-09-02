@@ -47,7 +47,7 @@ release:
 publish:
   <<: *base-default
   rules:
-    - if: $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_TAG != null
   script:
     - ci-node-config
     - ci-node-release
