@@ -18,8 +18,8 @@ lint:
   stage: lint
 
 release:
-  only:
-    - master
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
   script: docker run
     -e CI_COMMIT_REF_NAME
     -e CI_PROJECT_PATH
@@ -32,8 +32,8 @@ release:
   stage: deploy
 
 publish:
-  only:
-    - tags
+  rules:
+    - if: $CI_COMMIT_TAG != null
   script: docker run
     -e CI_COMMIT_TAG
     -e CI_PROJECT_NAME
