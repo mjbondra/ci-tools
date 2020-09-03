@@ -1,5 +1,5 @@
 pages:
-  image: wondermonger/ci-tools:v10.0.0
+  image: wondermonger/ci-tools:v10.0.1
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
   artifacts:
