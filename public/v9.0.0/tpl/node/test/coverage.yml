@@ -1,0 +1,10 @@
+coverage:
+  image: wondermonger/ci-tools:v9.0.0
+  except:
+    - tags
+  artifacts:
+    paths:
+      - public/coverage/
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  script: npm run test:coverage
+  stage: test

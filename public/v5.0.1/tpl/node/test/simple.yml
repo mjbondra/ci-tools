@@ -1,0 +1,15 @@
+test:
+  except:
+    - tags
+  script: npm run test
+  stage: test
+
+coverage:
+  except:
+    - tags
+  artifacts:
+    paths:
+      - public/coverage/
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  script: npm run test:coverage
+  stage: test
