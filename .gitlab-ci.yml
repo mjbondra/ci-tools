@@ -14,7 +14,8 @@ lint:
   rules:
     - if: $CI_COMMIT_TAG == null
   script: docker run
-    -w "/opt/ci-tools"
+    -v "${CI_PROJECT_DIR}:${CI_PROJECT_DIR}"
+    -w "${CI_PROJECT_DIR}"
     "${TEST_TAG}"
     /bin/bash -c "ci-shell-lint"
   stage: lint
