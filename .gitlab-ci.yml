@@ -30,7 +30,7 @@ release:
     -e SSH_PRIVATE_KEY
     -w "/opt/ci-tools"
     "${TEST_TAG}"
-    /bin/bash -c "./build.sh && ci-git-config && ci-git-release -t shell -a bin -a lib -a tpl -a README.md"
+    /bin/bash -c "./build.sh && ci-git-config && ci-git-release -t shell -a bin -a lib -a public -a tpl -a README.md"
   stage: deploy
 
 publish:
