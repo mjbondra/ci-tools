@@ -12,12 +12,12 @@ Use it in a GitLab CI/CD Pipeline.
 
 ```yaml
 include:
-  - https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/base.yml
-  - https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/post-install/lint.yml
-  - https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/test/simple.yml
-  - https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/test/coverage.yml
-  - https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/build/public.yml
-  - https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/post-build/pages.yml
+  - https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/base.yml
+  - https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/post-install/lint.yml
+  - https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/test/simple.yml
+  - https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/test/coverage.yml
+  - https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/build/public.yml
+  - https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/post-build/pages.yml
 ```
 
 **Example `docker run`**
@@ -42,10 +42,10 @@ docker run \
 | Tag Pattern  | Description                                                | Examples                                |
 | ------------ | ---------------------------------------------------------- | --------------------------------------- |
 | `latest`     | Latest Release                                             | `latest`                                |
-| `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v10` `v5` `v4`                          |
-| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v10.0` `v5.1` `v4.0`                    |
-| `vX.Y.Z`     | Specific Patch Release                                     | `v10.0.1` `v5.1.2` `v4.0.1`              |
-| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v10.0.1-0` `v5.1.2-alpha` `v4.0.1-beta` |
+| `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v11` `v5` `v4`                          |
+| `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v11.0` `v5.1` `v4.0`                    |
+| `vX.Y.Z`     | Specific Patch Release                                     | `v11.0.0` `v5.1.2` `v4.0.1`              |
+| `vX.Y.Z-A`\* | Specific Prerelease                                        | `v11.0.0-0` `v5.1.2-alpha` `v4.0.1-beta` |
 
 \* if prereleases are published, they should not be used for anything other than development
 
@@ -173,19 +173,19 @@ docker run \
 
 Versioned templates should be preferred:
 
-**Versioned (_preferred_)**: https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/base.yml  
+**Versioned (_preferred_)**: https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/base.yml  
 **Master (_latest_)**: https://wondermonger.gitlab.io/ci-tools/tpl/node/base.yml
 
 | URL                                                                                | Description                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/base.yml              | Base template for Node.js projects that provides installation, dependency auditing, outdated dependency notification, patch versioning, git release tagging, and npm publishing. |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/post-install/lint.yml | Invokes `npm run lint` during the `post-install` stage.                                                                                                                          |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/test/simple.yml       | Invokes `npm test` during the `test` stage.                                                                                                                                      |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/test/expanded.yml     | Invokes `npm run test:integration` and `npm run test:unit` during the `test` stage.                                                                                              |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/test/coverage.yml     | Invokes `npm run test:coverage` and extracts coverage data during the `test` stage. This template will persist artifacts created in the `./public/coverage` directory.           |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/build/dist.yml        | Invokes `npm run build` during the `build` stage. This template will persist artifacts created in the `./dist` directory.                                                        |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/build/public.yml      | Invokes `npm run build` during the `build` stage. This template will persist artifacts created in the `./public` directory.                                                      |
-| https://wondermonger.gitlab.io/ci-tools/v10.0.1/tpl/node/post-build/pages.yml  | A generic GitLab pages job executed during the `post-build` stage.                                                                                                               |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/base.yml              | Base template for Node.js projects that provides installation, dependency auditing, outdated dependency notification, patch versioning, git release tagging, and npm publishing. |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/post-install/lint.yml | Invokes `npm run lint` during the `post-install` stage.                                                                                                                          |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/test/simple.yml       | Invokes `npm test` during the `test` stage.                                                                                                                                      |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/test/expanded.yml     | Invokes `npm run test:integration` and `npm run test:unit` during the `test` stage.                                                                                              |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/test/coverage.yml     | Invokes `npm run test:coverage` and extracts coverage data during the `test` stage. This template will persist artifacts created in the `./public/coverage` directory.           |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/build/dist.yml        | Invokes `npm run build` during the `build` stage. This template will persist artifacts created in the `./dist` directory.                                                        |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/build/public.yml      | Invokes `npm run build` during the `build` stage. This template will persist artifacts created in the `./public` directory.                                                      |
+| https://wondermonger.gitlab.io/ci-tools/v11.0.0/tpl/node/post-build/pages.yml  | A generic GitLab pages job executed during the `post-build` stage.                                                                                                               |
 
 ## License
 
