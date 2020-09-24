@@ -1,0 +1,8 @@
+build:
+  except:
+    - tags
+  artifacts:
+    paths:
+      - public/
+  script: npm run build
+  stage: build

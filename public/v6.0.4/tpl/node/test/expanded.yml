@@ -1,0 +1,11 @@
+unit:
+  except:
+    - tags
+  script: npm run test:unit
+  stage: test
+
+integration:
+  except:
+    - tags
+  script: npm run test:integration
+  stage: test

@@ -1,0 +1,8 @@
+pages:
+  only:
+    - master
+  artifacts:
+    paths:
+      - public/
+  script: :
+  stage: post-build

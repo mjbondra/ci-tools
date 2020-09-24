@@ -1,0 +1,48 @@
+image: wondermonger/ci-tools:v6.0.4
+
+stages:
+  - install
+  - post-install
+  - test
+  - build
+  - post-build
+  - deploy
+
+install:
+  except:
+    - tags
+  artifacts:
+    paths:
+      - node_modules/
+  script: npm i
+  stage: install
+
+audit:
+  except:
+    - tags
+  allow_failure: true
+  script: npm audit
+  stage: post-install
+
+outdated:
+  except:
+    - tags
+  allow_failure: true
+  script: npm outdated
+  stage: post-install
+
+release:
+  only:
+    - master
+  script:
+    - ci-git-config
+    - ci-git-release
+  stage: deploy
+
+publish:
+  only:
+    - tags
+  script:
+    - ci-node-config
+    - ci-node-release
+  stage: deploy

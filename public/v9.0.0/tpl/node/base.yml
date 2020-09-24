@@ -1,0 +1,54 @@
+.base-default: &base-default
+  image: wondermonger/ci-tools:v9.0.0
+
+stages:
+  - install
+  - post-install
+  - test
+  - build
+  - post-build
+  - deploy
+
+install:
+  <<: *base-default
+  except:
+    - tags
+  artifacts:
+    paths:
+      - node_modules/
+  script: npm i
+  stage: install
+
+audit:
+  <<: *base-default
+  except:
+    - tags
+  allow_failure: true
+  script: npm audit
+  stage: post-install
+
+outdated:
+  <<: *base-default
+  except:
+    - tags
+  allow_failure: true
+  script: npm outdated
+  stage: post-install
+
+release:
+  <<: *base-default
+  only:
+    - master
+  script:
+    - ci-git-config
+    - ci-git-release
+  stage: deploy
+
+publish:
+  <<: *base-default
+  only:
+    - tags
+  script:
+    - ci-node-config
+    - ci-node-release
+  stage: deploy
