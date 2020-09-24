@@ -47,7 +47,13 @@ while read -r -d "" TEMPLATE_PATH; do
     TEMPLATE_WITH_REPLACED_VERSION="${TEMPLATE//$PREVIOUS_VERSION/$IMAGE_VERSION}"
     echo "$TEMPLATE_WITH_REPLACED_VERSION" >"$TEMPLATE_PATH"
   fi
-done < <(find tpl -name "*.yml" -print0)
+done < <(find public/tpl -name "*.yml" -print0)
+
+# create versioned templates directory
+mkdir "public/${IMAGE_VERSION}"
+
+# copy templates to versioned templates directory
+cp -R public/tpl "public/${IMAGE_VERSION}/tpl"
 
 # version readme
 README="$(cat README.md)"
