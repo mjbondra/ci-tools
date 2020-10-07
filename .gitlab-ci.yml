@@ -3,6 +3,12 @@
   services:
     - docker:dind
 
+variables:
+  DOCKER_PASSWORD: $CI_REGISTRY_PASSWORD
+  DOCKER_REGISTRY: $CI_REGISTRY
+  DOCKER_USERNAME: $CI_REGISTRY_USER
+  TEST_TAG: test:latest
+
 stages:
   - lint
   - build
@@ -17,8 +23,8 @@ lint:
   rules:
     - if: $CI_COMMIT_TAG == null
   script: docker run
-    -v "${CI_PROJECT_DIR}:${CI_PROJECT_DIR}"
-    -w "${CI_PROJECT_DIR}"
+    -v "${PWD}:${PWD}"
+    -w "${PWD}"
     "${TEST_TAG}"
     /bin/bash -c "ci-shell-lint"
   stage: lint
@@ -34,8 +40,8 @@ build:
       - public/
       - README.md
   script: docker run
-    -v "${CI_PROJECT_DIR}:${CI_PROJECT_DIR}"
-    -w "${CI_PROJECT_DIR}"
+    -v "${PWD}:${PWD}"
+    -w "${PWD}"
     "${TEST_TAG}"
     /bin/bash -c "./build.sh"
   stage: build
@@ -60,8 +66,8 @@ release:
     -e GIT_USER_EMAIL
     -e GIT_USER_NAME
     -e SSH_PRIVATE_KEY
-    -v "${CI_PROJECT_DIR}:${CI_PROJECT_DIR}"
-    -w "${CI_PROJECT_DIR}"
+    -v "${PWD}:${PWD}"
+    -w "${PWD}"
     "${TEST_TAG}"
     /bin/bash -c "ci-git-config && ci-git-release -t shell -a bin -a lib -a public -a README.md"
   stage: deploy
@@ -75,13 +81,11 @@ publish:
     -e CI_PROJECT_NAME
     -e DOCKER_ORGANIZATION
     -e DOCKER_PASSWORD
+    -e DOCKER_REGISTRY
     -e DOCKER_USERNAME
     -v "/var/run/docker.sock:/var/run/docker.sock"
-    -v "${CI_PROJECT_DIR}:${CI_PROJECT_DIR}"
-    -w "${CI_PROJECT_DIR}"
+    -v "${PWD}:${PWD}"
+    -w "${PWD}"
     "${TEST_TAG}"
     /bin/bash -c "ci-docker-build && ci-docker-config && ci-docker-release"
   stage: deploy
-
-variables:
-  TEST_TAG: test:latest
