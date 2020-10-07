@@ -4,9 +4,6 @@
     - docker:dind
 
 variables:
-  DOCKER_PASSWORD: $CI_JOB_TOKEN
-  DOCKER_REGISTRY: $CI_REGISTRY
-  DOCKER_USERNAME: $CI_REGISTRY_USER
   TEST_TAG: test:latest
 
 stages:
@@ -80,9 +77,9 @@ publish:
     -e CI_COMMIT_TAG
     -e CI_PROJECT_NAME
     -e DOCKER_ORGANIZATION
-    -e DOCKER_PASSWORD
-    -e DOCKER_REGISTRY
-    -e DOCKER_USERNAME
+    -e DOCKER_PASSWORD="${CI_REGISTRY_PASSWORD}"
+    -e DOCKER_REGISTRY="${CI_REGISTRY}"
+    -e DOCKER_USERNAME="${CI_REGISTRY_USER}"
     -v "/var/run/docker.sock:/var/run/docker.sock"
     -v "${PWD}:${PWD}"
     -w "${PWD}"
