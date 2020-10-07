@@ -4,7 +4,7 @@ CI/CD image, scripts, and templates for [@wondermonger](https://gitlab.com/wonde
 
 ## Usage
 
-The CI/CD scripts are made available as a docker image ([wongermonger/ci-tools](https://hub.docker.com/r/wondermonger/ci-tools)) that extends [node:alpine](https://github.com/nodejs/docker-node#nodealpine).
+The CI/CD scripts are made available as a docker image ([wongermonger/ci-tools](https://gitlab.com/wondermonger/ci-tools/container_registry)) that extends [node:alpine](https://github.com/nodejs/docker-node#nodealpine).
 
 Use it in a GitLab CI/CD Pipeline.
 
@@ -40,9 +40,9 @@ docker run \
 
 **Available Images**
 
-| Tag Pattern  | Description                                                | Examples                                |
-| ------------ | ---------------------------------------------------------- | --------------------------------------- |
-| `latest`     | Latest Release                                             | `latest`                                |
+| Tag Pattern  | Description                                                | Examples                                 |
+| ------------ | ---------------------------------------------------------- | ---------------------------------------- |
+| `latest`     | Latest Release                                             | `latest`                                 |
 | `vX`         | Latest Minor or Patch Release Within a Given Major Version | `v12` `v5` `v4`                          |
 | `vX.Y`       | Latest Patch Release Within a Given Minor Version          | `v12.0` `v5.1` `v4.0`                    |
 | `vX.Y.Z`     | Specific Patch Release                                     | `v12.0.0` `v5.1.2` `v4.0.1`              |
